@@ -1,10 +1,9 @@
 package com.ms.client.services;
 
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.exceptions.ClientCreationException;
+import com.ms.client.exceptions.ClientNotFoundException;
 import com.ms.client.model.Client;
 import com.ms.client.repository.ClientRepository;
-import com.ms.client.exceptions.ClientNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class ClientService {
     @Autowired
     ClientRepository repository;
 
-    public List<ClientDTO> findAll() {
+    public List<ClientDTO> findAll() throws Exception {
         List<Client> list = repository.findAll();
         if (list.isEmpty()) {
             throw new ClientNotFoundException("No clients found");
