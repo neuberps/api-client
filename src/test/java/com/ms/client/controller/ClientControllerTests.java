@@ -7,10 +7,7 @@ import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -48,7 +45,7 @@ public class ClientControllerTests extends ClientApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(clientDTO))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
                 .andReturn();
     }
@@ -117,13 +114,4 @@ public class ClientControllerTests extends ClientApplicationTests {
         }
     }
 
-    @ComponentScan(basePackages = {"com.ms.client.repository"})
-    @SpringBootApplication
-    public static class ClientApplication {
-
-        public static void main(String[] args) {
-            SpringApplication.run(ClientApplication.class, args);
-        }
-
-    }
 }
