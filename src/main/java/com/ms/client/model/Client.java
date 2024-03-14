@@ -1,5 +1,6 @@
 package com.ms.client.model;
 import com.ms.client.dto.ClientDTO;
+import com.ms.client.dto.ClientUpdateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Client implements Serializable {
     public Client (ClientDTO clientDTO){
         BeanUtils.copyProperties(clientDTO, this);
     }
+
     public Client() {
         super();
     }

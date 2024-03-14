@@ -3,6 +3,7 @@ package com.ms.client.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ms.client.ClientApplicationTests;
 import com.ms.client.dto.ClientDTO;
+import com.ms.client.dto.ClientUpdateDTO;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles("tests")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ClientControllerTests extends ClientApplicationTests {
 
@@ -39,7 +40,7 @@ public class ClientControllerTests extends ClientApplicationTests {
     @Order(1)
     public void testCreate() throws Exception {
         log.info("testCreate");
-        ClientDTO clientDTO = new ClientDTO(id,"Neuber", "neuber.paiva@gmail.com", "9994545429", "440120165656");
+        ClientDTO clientDTO = new ClientDTO(id,"Neuber Souza", "neuber.paiva@gmail.com", "99945454292", "44012016565");
         this.mockMvc.perform( MockMvcRequestBuilders
                         .post("/api/clients")
                         .contentType(MediaType.APPLICATION_JSON)

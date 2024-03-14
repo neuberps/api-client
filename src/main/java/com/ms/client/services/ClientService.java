@@ -1,6 +1,7 @@
 package com.ms.client.services;
 
 import com.ms.client.dto.ClientDTO;
+import com.ms.client.dto.ClientUpdateDTO;
 import com.ms.client.exceptions.ClientNotFoundException;
 import com.ms.client.model.Client;
 import com.ms.client.repository.ClientRepository;
@@ -42,14 +43,14 @@ public class ClientService {
                 .map(ClientDTO::new)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with email: " + email));
     }
-    public ClientDTO update(String id, ClientDTO clientDTO) throws Exception {
+    public ClientDTO update(String id, ClientUpdateDTO clientUpdateDTO) throws Exception {
         Optional<Client> optionalClient = repository.findById(id);
         if (optionalClient.isPresent()) {
             Client entity = optionalClient.get();
-            entity.setName(clientDTO.getName());
-            entity.setCel(clientDTO.getCel());
-            entity.setEmail(clientDTO.getEmail());
-            entity.setCpf(clientDTO.getCpf());
+            entity.setName(clientUpdateDTO.getName());
+            entity.setCel(clientUpdateDTO.getCel());
+            entity.setEmail(clientUpdateDTO.getEmail());
+            entity.setCpf(clientUpdateDTO.getCpf());
             repository.save(entity);
             return new ClientDTO(entity);
         } else {
