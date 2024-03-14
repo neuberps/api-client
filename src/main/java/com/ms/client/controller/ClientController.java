@@ -1,8 +1,6 @@
 package com.ms.client.controller;
 
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.exceptions.ClientCreationException;
-import com.ms.client.exceptions.ClientNotFoundException;
 import com.ms.client.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,11 +22,15 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<ClientDTO>> findAll() {
-        List<ClientDTO> clients = service.findAll();
-        if (clients.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        try {
+            List<ClientDTO> clients = service.findAll();
+            if (clients.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(clients);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(clients);
     }
 
     @PostMapping
