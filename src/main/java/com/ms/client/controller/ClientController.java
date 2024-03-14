@@ -13,35 +13,77 @@ import java.util.List;
 @RequestMapping("/api/clients")
 public class ClientController {
 
+    private final ClientService service;
+
     @Autowired
-    private ClientService service;
+    public ClientController(ClientService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<ClientDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+        try {
+            List<ClientDTO> clients = service.findAll();
+            if (clients.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(clients);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping
     public ResponseEntity<ClientDTO> create(@RequestBody ClientDTO entity) {
-        return ResponseEntity.ok().body(service.create(entity));
+        try {
+            ClientDTO createdClient = service.create(entity);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping(value="/getId/{id}")
-    public ResponseEntity<ClientDTO> findById(@PathVariable String id){
-        return ResponseEntity.status(HttpStatus.OK).body( service.findById(id));
+    public ResponseEntity<ClientDTO> findById(@PathVariable String id) {
+        try {
+            ClientDTO client = service.findById(id);
+            return ResponseEntity.ok(client);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
+
     @GetMapping(value="/getEmail/{email}")
-    public ResponseEntity<ClientDTO> findByEmail(@PathVariable String email){
-        return ResponseEntity.status(HttpStatus.OK).body( service.findByEmail(email));
+    public ResponseEntity<ClientDTO> findByEmail(@PathVariable String email) {
+        try {
+            ClientDTO client = service.findByEmail(email);
+            if (client != null) {
+                return ResponseEntity.ok(client);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable String id , @RequestBody ClientDTO clientDTO){
-     return ResponseEntity.status(HttpStatus.OK).body(service.update(id, clientDTO));
+    public ResponseEntity<ClientDTO> update(@PathVariable String id, @RequestBody ClientDTO clientDTO) {
+        try {
+            ClientDTO updatedClient = service.update(id, clientDTO);
+            return ResponseEntity.ok(updatedClient);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping(value="/{id}")
-    public void delete(@PathVariable String id){
-      service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        try {
+            service.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

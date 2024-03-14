@@ -45,7 +45,7 @@ public class ClientControllerTests extends ClientApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(clientDTO))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
                 .andReturn();
     }
@@ -113,4 +113,5 @@ public class ClientControllerTests extends ClientApplicationTests {
             throw new RuntimeException(e);
         }
     }
+
 }
