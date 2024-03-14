@@ -2,6 +2,7 @@ package com.ms.client.services;
 
 import com.ms.client.dto.ClientDTO;
 import com.ms.client.exceptions.ClientNotFoundException;
+import com.ms.client.exceptions.ServiceException;
 import com.ms.client.model.Client;
 import com.ms.client.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ClientService {
     @Autowired
     ClientRepository repository;
 
-    public List<ClientDTO> findAll() throws Exception {
+    public List<ClientDTO> findAll() throws ServiceException {
         List<Client> list = repository.findAll();
         if (list.isEmpty()) {
             throw new ClientNotFoundException("No clients found");
@@ -24,25 +25,24 @@ public class ClientService {
         return list.stream().map(ClientDTO::new).toList();
     }
 
-    public ClientDTO create(ClientDTO clientDTO) throws Exception {
+    public ClientDTO create(ClientDTO clientDTO) throws ServiceException {
         Client entity = new Client(clientDTO);
         repository.save(entity);
         return new ClientDTO(entity);
-
     }
 
-    public ClientDTO findById(String id) throws Exception {
+    public ClientDTO findById(String id) throws ServiceException {
         return repository.findById(id)
                 .map(ClientDTO::new)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with ID: " + id));
     }
 
-    public ClientDTO findByEmail(String email) throws Exception {
+    public ClientDTO findByEmail(String email) throws ServiceException {
         return repository.findByEmail(email)
                 .map(ClientDTO::new)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with email: " + email));
     }
-    public ClientDTO update(String id, ClientDTO clientDTO) throws Exception {
+    public ClientDTO update(String id, ClientDTO clientDTO) throws ServiceException {
         Optional<Client> optionalClient = repository.findById(id);
         if (optionalClient.isPresent()) {
             Client entity = optionalClient.get();
@@ -57,7 +57,7 @@ public class ClientService {
         }
     }
 
-    public void delete(String id) throws Exception {
+    public void delete(String id) throws ServiceException {
         if (!repository.existsById(id)) {
             throw new ClientNotFoundException("Client not found with ID: " + id);
         }

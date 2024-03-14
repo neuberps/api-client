@@ -1,6 +1,7 @@
 package com.ms.client.controller;
 
 import com.ms.client.dto.ClientDTO;
+import com.ms.client.exceptions.ServiceException;
 import com.ms.client.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ClientController {
                 return ResponseEntity.noContent().build();
             }
             return ResponseEntity.ok(clients);
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.badRequest().build();
         }
     }
@@ -38,7 +39,7 @@ public class ClientController {
         try {
             ClientDTO createdClient = service.create(entity);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.badRequest().build();
         }
     }
@@ -48,7 +49,7 @@ public class ClientController {
         try {
             ClientDTO client = service.findById(id);
             return ResponseEntity.ok(client);
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -62,7 +63,7 @@ public class ClientController {
             } else {
                 return ResponseEntity.notFound().build();
             }
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -72,7 +73,7 @@ public class ClientController {
         try {
             ClientDTO updatedClient = service.update(id, clientDTO);
             return ResponseEntity.ok(updatedClient);
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -82,7 +83,7 @@ public class ClientController {
         try {
             service.delete(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             return ResponseEntity.notFound().build();
         }
     }
