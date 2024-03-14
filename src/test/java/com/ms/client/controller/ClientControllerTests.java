@@ -7,7 +7,10 @@ import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -112,5 +115,15 @@ public class ClientControllerTests extends ClientApplicationTests {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @ComponentScan(basePackages = {"com.ms.client.repository"})
+    @SpringBootApplication
+    public static class ClientApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(ClientApplication.class, args);
+        }
+
     }
 }
