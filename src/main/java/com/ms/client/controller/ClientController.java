@@ -3,9 +3,11 @@ package com.ms.client.controller;
 import com.ms.client.dto.ClientDTO;
 import com.ms.client.exceptions.ServiceException;
 import com.ms.client.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +36,9 @@ public class ClientController {
         }
     }
 
+    @Transactional
     @PostMapping
-    public ResponseEntity<ClientDTO> create(@RequestBody ClientDTO entity) {
+    public ResponseEntity<ClientDTO> create(@RequestBody @Valid ClientDTO entity) {
         try {
             ClientDTO createdClient = service.create(entity);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
@@ -68,8 +71,9 @@ public class ClientController {
         }
     }
 
+    @Transactional
     @PutMapping(value="/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable String id, @RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<ClientDTO> update(@PathVariable String id, @Valid @RequestBody ClientDTO clientDTO) {
         try {
             ClientDTO updatedClient = service.update(id, clientDTO);
             return ResponseEntity.ok(updatedClient);

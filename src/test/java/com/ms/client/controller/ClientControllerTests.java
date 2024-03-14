@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles("tests")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ClientControllerTests extends ClientApplicationTests {
 
@@ -39,7 +39,7 @@ public class ClientControllerTests extends ClientApplicationTests {
     @Order(1)
     public void testCreate() throws Exception {
         log.info("testCreate");
-        ClientDTO clientDTO = new ClientDTO(id,"Neuber", "neuber.paiva@gmail.com", "9994545429", "440120165656");
+        ClientDTO clientDTO = new ClientDTO(id,"Neuber Souza", "neuber.paiva@gmail.com", "99945454292", "44012016565");
         this.mockMvc.perform( MockMvcRequestBuilders
                         .post("/api/clients")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ public class ClientControllerTests extends ClientApplicationTests {
         log.info("testUpdate");
         this.mockMvc.perform( MockMvcRequestBuilders
                         .put("/api/clients/" + id)
-                        .content(asJsonString(new ClientDTO(null, "Maria", "maria.p@gmail.com", "24394545429", "440120165656")))
+                        .content(asJsonString(new ClientDTO(null, "Maria Silva", "maria.p@gmail.com", "24394545429", "44012016565")))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
