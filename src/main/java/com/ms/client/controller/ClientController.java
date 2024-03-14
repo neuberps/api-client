@@ -1,7 +1,6 @@
 package com.ms.client.controller;
 
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.dto.ClientUpdateDTO;
 import com.ms.client.services.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

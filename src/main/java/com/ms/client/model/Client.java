@@ -1,6 +1,5 @@
 package com.ms.client.model;
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.dto.ClientUpdateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

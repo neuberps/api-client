@@ -3,7 +3,6 @@ package com.ms.client.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ms.client.ClientApplicationTests;
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.dto.ClientUpdateDTO;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

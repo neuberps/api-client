@@ -1,7 +1,6 @@
 package com.ms.client.services;
 
 import com.ms.client.dto.ClientDTO;
-import com.ms.client.dto.ClientUpdateDTO;
 import com.ms.client.exceptions.ClientNotFoundException;
 import com.ms.client.model.Client;
 import com.ms.client.repository.ClientRepository;
