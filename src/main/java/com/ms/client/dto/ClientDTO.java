@@ -30,7 +30,7 @@ public class ClientDTO implements Serializable {
 
     @NotBlank
     @Pattern(regexp = "\\d{11}", message = "O telefone deve ser: " +
-            "No formato: XXXXXXXXXXX (Apenas números)" + 
+            "No formato: XXXXXXXXXXX (Apenas números)" +
             "Devem ser inseridos 11 números (DDD, 9 na frente e o número em si")
     private String cel;
 

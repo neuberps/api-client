@@ -88,7 +88,7 @@ public class ClientControllerTests extends ClientApplicationTests {
         log.info("testUpdate");
         this.mockMvc.perform( MockMvcRequestBuilders
                         .put("/api/clients/" + id)
-                        .content(asJsonString(new ClientDTO(null, "Maria", "maria.p@gmail.com", "24394545429", "440120165656")))
+                        .content(asJsonString(new ClientDTO(null, "Maria Silva", "maria.p@gmail.com", "24394545429", "44012016565")))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

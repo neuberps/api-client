@@ -43,14 +43,14 @@ public class ClientService {
                 .map(ClientDTO::new)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with email: " + email));
     }
-    public ClientDTO update(String id, ClientUpdateDTO clientUpdateDTO) throws Exception {
+    public ClientDTO update(String id, ClientDTO clientDTO) throws Exception {
         Optional<Client> optionalClient = repository.findById(id);
         if (optionalClient.isPresent()) {
             Client entity = optionalClient.get();
-            entity.setName(clientUpdateDTO.getName());
-            entity.setCel(clientUpdateDTO.getCel());
-            entity.setEmail(clientUpdateDTO.getEmail());
-            entity.setCpf(clientUpdateDTO.getCpf());
+            entity.setName(clientDTO.getName());
+            entity.setCel(clientDTO.getCel());
+            entity.setEmail(clientDTO.getEmail());
+            entity.setCpf(clientDTO.getCpf());
             repository.save(entity);
             return new ClientDTO(entity);
         } else {

@@ -73,9 +73,9 @@ public class ClientController {
 
     @Transactional
     @PutMapping(value="/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable String id, @Valid @RequestBody ClientUpdateDTO clientUpdateDTO) {
+    public ResponseEntity<ClientDTO> update(@PathVariable String id, @Valid @RequestBody ClientDTO clientDTO) {
         try {
-            ClientDTO updatedClient = service.update(id, clientUpdateDTO);
+            ClientDTO updatedClient = service.update(id, clientDTO);
             return ResponseEntity.ok(updatedClient);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
