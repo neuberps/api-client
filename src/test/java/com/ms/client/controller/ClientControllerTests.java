@@ -39,7 +39,7 @@ public class ClientControllerTests extends ClientApplicationTests {
     @Order(1)
     public void testCreate() throws Exception {
         log.info("testCreate");
-        ClientDTO clientDTO = new ClientDTO(id,"Neuber Souza", "neuber.paiva@gmail.com", "99945454292", "44012016565");
+        ClientDTO clientDTO = new ClientDTO(id,"Neuber Souza", "neuber.paiva@gmail.com", "99945454292", "44012016565", "neuberps", null, null);
         this.mockMvc.perform( MockMvcRequestBuilders
                         .post("/api/clients")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ public class ClientControllerTests extends ClientApplicationTests {
         log.info("testUpdate");
         this.mockMvc.perform( MockMvcRequestBuilders
                         .put("/api/clients/" + id)
-                        .content(asJsonString(new ClientDTO(null, "Maria Silva", "maria.p@gmail.com", "24394545429", "44012016565")))
+                        .content(asJsonString(new ClientDTO(null, "Maria Silva", "maria.p@gmail.com", "24394545429", "44012016565", "mariap", null, null)))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -38,6 +38,11 @@ public class ClientDTO implements Serializable {
     @Pattern(regexp = "\\d{11}", message = "CPF deve conter 11 números!")
     private String cpf;
 
+    @NotBlank
+    private String registryUser;
+
+    private String created;
+    private String updated;
 
     public  ClientDTO (Client entity){
         BeanUtils.copyProperties(entity, this);

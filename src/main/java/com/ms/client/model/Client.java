@@ -20,11 +20,10 @@ public class Client implements Serializable {
     private String email;
     private String cel;
     private String cpf;
-/*
     private String created;
     private String updated;
-    private String user;
- */
+    private String registryUser;
+
     public Client (ClientDTO clientDTO){
         BeanUtils.copyProperties(clientDTO, this);
     }

@@ -8,6 +8,7 @@ import com.ms.client.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,8 @@ public class ClientService {
 
     public ClientDTO create(ClientDTO clientDTO) throws ServiceException {
         Client entity = new Client(clientDTO);
+        entity.setRegistryUser(clientDTO.getRegistryUser());
+        entity.setCreated(LocalDateTime.now().toString());
         repository.save(entity);
         return new ClientDTO(entity);
     }
@@ -50,6 +53,8 @@ public class ClientService {
             entity.setCel(clientDTO.getCel());
             entity.setEmail(clientDTO.getEmail());
             entity.setCpf(clientDTO.getCpf());
+            entity.setRegistryUser(clientDTO.getRegistryUser());
+            entity.setUpdated(LocalDateTime.now().toString());
             repository.save(entity);
             return new ClientDTO(entity);
         } else {
