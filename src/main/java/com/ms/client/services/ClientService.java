@@ -7,6 +7,7 @@ import com.ms.client.model.Client;
 import com.ms.client.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +27,7 @@ public class ClientService {
         return list.stream().map(ClientDTO::new).toList();
     }
 
+    @Transactional
     public ClientDTO create(ClientDTO clientDTO) throws ServiceException {
         Client entity = new Client(clientDTO);
         entity.setRegistryUser(clientDTO.getRegistryUser());
@@ -45,6 +47,8 @@ public class ClientService {
                 .map(ClientDTO::new)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with email: " + email));
     }
+
+    @Transactional
     public ClientDTO update(String id, ClientDTO clientDTO) throws ServiceException {
         Optional<Client> optionalClient = repository.findById(id);
         if (optionalClient.isPresent()) {
