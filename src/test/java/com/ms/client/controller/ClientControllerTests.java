@@ -68,7 +68,7 @@ public class ClientControllerTests extends ClientApplicationTests {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());;
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
     @Test
     @Order(4)
@@ -78,7 +78,7 @@ public class ClientControllerTests extends ClientApplicationTests {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").exists());;
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").exists());
     }
 
     @Test
